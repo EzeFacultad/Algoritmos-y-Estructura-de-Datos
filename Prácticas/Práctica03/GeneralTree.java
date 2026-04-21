@@ -60,6 +60,7 @@ public class GeneralTree<T>{
 	}
 	
 
+	// =============================== EJERCICIO 03
 	public int altura() {	 
 		int valor = 0;
 		if ( this.isEmpty() ) return valor;
@@ -108,10 +109,10 @@ public class GeneralTree<T>{
 			max = Math.max(max, size);
 
 			for ( int i = 0; i < size; i++ ) {
-				GeneralTree<T> v = cola.dequeue();
+				GeneralTree<T> d = cola.dequeue();
 
-				if ( v.hasChildren() ) {
-					for ( GeneralTree<T> child : v.getChildren() ) {
+				if ( d.hasChildren() ) {
+					for ( GeneralTree<T> child : d.getChildren() ) {
 						cola.enqueue(child);
 					}
 				}
@@ -119,5 +120,36 @@ public class GeneralTree<T>{
 		}
 
 		return max;
+	}
+
+
+	// =============================== EJERCICIO 05
+	public boolean esAncestro(T a, T b) {
+    if (this.isEmpty()) return false;
+
+    // Si encontramos A, buscamos B en su subárbol
+    if (this.getData().equals(a)) {
+        return contiene(b);
+    }
+
+    // Si no es A, seguimos buscando en los hijos
+    for (GeneralTree<T> child : this.getChildren()) {
+        if (child.esAncestro(a, b)) {
+            return true;
+        }
+    }
+
+    return false;
+	}
+
+	// Método auxiliar para buscar un dato en el subárbol
+	private boolean contiene(T dato) {
+			if (this.getData().equals(dato)) return true;
+
+			for (GeneralTree<T> child : this.getChildren()) {
+					if (child.contiene(dato)) return true;
+			}
+
+			return false;
 	}
 }
