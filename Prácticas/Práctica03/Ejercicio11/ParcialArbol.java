@@ -19,7 +19,7 @@ public class ParcialArbol {
     while ( !cola.isEmpty() ) {
       int size = cola.size();
 
-      if ( cantAnterior != size ) return false;
+      if ( cantAnterior != 0 && size == cantAnterior + 1 ) return false;
 
       cantAnterior = size;
 
